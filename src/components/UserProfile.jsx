@@ -9,11 +9,20 @@ import {
   MenuItem,
   MenuList,
   Portal,
+  Text,
 } from '@chakra-ui/react'
 import { FiChevronDown } from 'react-icons/fi'
 import NextLink from 'next/link'
+import { useDispatch } from 'react-redux'
+import { logOutUser } from '../store/authentication/auth-actions'
+import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 
 export default function UserProfile() {
+  const authUser = useSelector((state) => state?.auth?.authenticatedUser)
+
+  const dispatch = useDispatch()
+  const router = useRouter()
   return (
     <Box>
       <HStack spacing={{ base: '0', md: '6' }}>
@@ -37,6 +46,8 @@ export default function UserProfile() {
                     'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                   }
                 />
+                <Text>{authUser?.name}</Text>
+
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
                 </Box>
@@ -59,7 +70,14 @@ export default function UserProfile() {
                   <MenuItem>Profile</MenuItem>
                 </NextLink>
                 <MenuDivider />
-                <MenuItem>Sign out</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    dispatch(logOutUser())
+                    router.push('/login')
+                  }}
+                >
+                  Sign out
+                </MenuItem>
               </MenuList>
             </Portal>
           </Menu>

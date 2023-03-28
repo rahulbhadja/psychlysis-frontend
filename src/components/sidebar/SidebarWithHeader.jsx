@@ -18,25 +18,16 @@ import NavLink from './NavLink'
 import { RiSurveyLine } from 'react-icons/ri'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import Account from '../Account'
+import { CiFaceSmile, CiUser, CiMemoPad, CiHome } from 'react-icons/ci'
 
-interface LinkItemProps {
-  label: string
-  icon: IconType
-  href: string
-  onClick?: () => void
-}
-
-const LinkItems: Array<LinkItemProps> = [
-  { label: 'Home', icon: FiHome, href: '/' },
-  { label: 'Survey', icon: RiSurveyLine, href: '/survey' },
-  { label: 'Profile', icon: FiUser, href: '/profile' },
+const LinkItems = [
+  { label: 'Home', icon: CiHome, href: '/' },
+  { label: 'Survey', icon: CiMemoPad, href: '/survey' },
+  { label: 'Profile', icon: CiUser, href: '/profile' },
+  { label: 'Suggestions', icon: CiFaceSmile, href: '/suggestions' },
 ]
 
-export default function SidebarWithHeader({
-  children,
-}: {
-  children: ReactNode
-}) {
+export default function SidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -83,7 +74,7 @@ export default function SidebarWithHeader({
           fontFamily="monospace"
           fontWeight="bold"
         >
-          Logo
+          Psychlysis
         </Text>
 
         <HStack spacing={{ base: '0', md: '6' }}>
@@ -100,11 +91,7 @@ export default function SidebarWithHeader({
   )
 }
 
-interface SidebarProps extends BoxProps {
-  onClose: () => void
-}
-
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       transition="3s ease"
@@ -118,7 +105,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          Psychlysis
         </Text>
 
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />

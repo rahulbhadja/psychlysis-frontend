@@ -21,9 +21,12 @@ import {
 import Image from 'next/image'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { getAuthenticatedUser } from '../store/authentication/auth-actions'
+import UserProfile from './UserProfile'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let window: any
 
 const styles = {
   account: {
@@ -53,23 +56,38 @@ const styles = {
 
 function Account() {
   const router = useRouter()
+  const dispatch = useDispatch()
+  const authUser = useSelector((state) => state?.auth?.authenticatedUser)
+
+  useEffect(() => {
+    console.log('authUser', authUser)
+  }, [authUser])
+
+  useEffect(() => {
+    dispatch(getAuthenticatedUser())
+  }, [dispatch])
+
   return (
     <>
-      <Button
-        zIndex={10}
-        variant={'primary'}
-        borderRadius="35px"
-        onClick={() => router.push('/login')}
-      >
-        <Text
-          ml={'5px'}
-          fontSize={['14px', '14px', '18px', '18px']}
-          fontWeight="700px"
-          lineHeight={'25px'}
+      {authUser?.name ? (
+        <UserProfile />
+      ) : (
+        <Button
+          zIndex={10}
+          variant={'primary'}
+          borderRadius="35px"
+          onClick={() => router.push('/login')}
         >
-          Login
-        </Text>
-      </Button>
+          <Text
+            ml={'5px'}
+            fontSize={['14px', '14px', '18px', '18px']}
+            fontWeight="700px"
+            lineHeight={'25px'}
+          >
+            {authUser?.name || 'Login'}
+          </Text>
+        </Button>
+      )}
     </>
   )
 }

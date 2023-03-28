@@ -4,6 +4,7 @@ import Head from 'next/head'
 
 // import { useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import SidebarWithHeader from '../components/sidebar/SidebarWithHeader'
+import UserProfile from '../components/UserProfile'
 
 export default function Layout({ children }) {
   return (

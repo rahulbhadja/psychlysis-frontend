@@ -8,15 +8,15 @@ export const getAuthenticatedUser = () => {
       const { data } = await axios({
         method: 'GET',
 
-        url: `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
+        url: `http://localhost:8080/auth/user`,
         withCredentials: true,
       })
-      console.log(data)
 
       return data.user
     }
     try {
       const user = await getUserData()
+      console.log(user)
 
       dispatch(
         AuthActions.getAuthenticatedUser({
@@ -34,7 +34,7 @@ export const logOutUser = () => {
     const getUserLogOut = async () => {
       const { data } = await axios({
         method: 'GET',
-        url: `${process.env.SERVER_URL}/logout`,
+        url: `http://localhost:8080/auth/logout`,
         withCredentials: true,
       })
 

@@ -19,7 +19,16 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/survey/index.jsx"
+    "src/pages/survey/index.jsx",
+    "src/components/Account.jsx",
+    "src/pages/profile/personal.jsx",
+    "src/components/profile/personalInfoCard.jsx",
+    "src/components/UserProfile.jsx",
+    "src/pages/survey/detailed-survey/[...slug].jsx",
+    "src/pages/profile/index.jsx",
+    "src/pages/profile/completed.jsx",
+    "src/pages/profile/data-privacy.jsx",
+    "src/components/sidebar/SidebarWithHeader.jsx"
   ],
   "exclude": ["node_modules"]
 }

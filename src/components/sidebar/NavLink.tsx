@@ -21,7 +21,7 @@ export default function NavLink({ label, icon, href, onClose }: LinkItemProps) {
           height={'40px'}
           borderRadius={'10px'}
           bgColor={currentRoute === href ? 'white' : 'none'}
-          justifyContent={'center'}
+          justifyContent={'start'}
           alignItems={'center'}
           gap={'10px'}
           onClick={onClose}
@@ -30,6 +30,7 @@ export default function NavLink({ label, icon, href, onClose }: LinkItemProps) {
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
             scale: 4,
           }}
+          p={2}
         >
           <Icon
             as={icon}

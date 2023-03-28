@@ -14,16 +14,14 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useWeb3React } from '@web3-react/core'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../../../hooks'
+import { useSelector } from 'react-redux'
 
 const DetailedSurvey = () => {
-  const { account, activate, deactivate, chainId } = useWeb3React()
-
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const authUser = useSelector((state) => state?.auth?.authenticatedUser)
 
   const router = useRouter()
   const { slug } = router.query
@@ -51,7 +49,11 @@ const DetailedSurvey = () => {
     }
   }
 
-  async function onSubmit(e: any) {
+  useEffect(() => {
+    console.log('survey', survey)
+  }, [survey])
+
+  async function onSubmit(e) {
     setLoading(true)
 
     e.preventDefault()
@@ -64,7 +66,7 @@ const DetailedSurvey = () => {
           surveyId: survey?.surveyId,
           surveyName: survey?.surveyName,
           response: answers,
-          userAddress: account,
+          userId: authUser?.userId,
         }
       )
       console.log(response)
@@ -102,11 +104,7 @@ const DetailedSurvey = () => {
           <Text fontSize="md" fontWeight="bold" color="gray.700" mt={2} mb={4}>
             {survey?.description}
           </Text>
-          <Flex
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            width={'800px'}
-          >
+          <Flex justifyContent={'center'} alignItems={'center'} width={'800px'}>
             <Text
               fontSize="md"
               fontWeight="bold"
@@ -114,16 +112,7 @@ const DetailedSurvey = () => {
               mt={2}
               mb={4}
             >
-              cc Reward : {survey?.ccReward} USDC
-            </Text>
-            <Text
-              fontSize="md"
-              fontWeight="bold"
-              color="gray.700"
-              mt={2}
-              mb={4}
-            >
-              Survey Duration : {survey?.duration} Minute(s)
+              Survey Duration : {10} Minute(s)
             </Text>
           </Flex>
         </Flex>
@@ -156,7 +145,7 @@ const DetailedSurvey = () => {
                     {question?.answers?.map((option, index) => (
                       <Flex key={index}>
                         <Flex>
-                          {Object.entries(option).map(([key, value]: any) => (
+                          {Object.entries(option).map(([key, value]) => (
                             <Flex gap={'20px'} key={key}>
                               <input
                                 style={{

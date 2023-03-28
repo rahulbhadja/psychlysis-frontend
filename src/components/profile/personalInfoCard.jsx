@@ -7,18 +7,18 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const PersonalInformation = () => {
+  const authUser = useSelector((state) => state?.auth?.authenticatedUser)
   const textColor = useColorModeValue('gray.700', 'white')
   const [user, setUser] = useState({
-    name: 'John Doe',
+    name: authUser?.name,
     birthday: '01/01/2000',
     //email: "john@test.com",
     //location: "London, UK",
     maritalStatus: 'Single',
     language: 'English',
-    race: 'English',
-    ethnicity: 'English',
   })
 
   const userDetails = Object.keys(user).map((item) => {

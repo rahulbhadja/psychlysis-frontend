@@ -1,5 +1,6 @@
 import { Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import PersonalInformation from '../../components/profile/personalInfoCard'
 
 export default function Personal() {
   const router = useRouter()
@@ -17,7 +18,7 @@ export default function Personal() {
         <Flex>
           <Heading>Personal Information</Heading>
         </Flex>
-        <Flex>
+        {/* <Flex>
           <Button
             width={'full'}
             height={'40px'}
@@ -34,7 +35,8 @@ export default function Personal() {
           >
             {`View Completed Surveys`}
           </Button>
-        </Flex>{' '}
+        </Flex>{' '} */}
+        <PersonalInformation />
       </Flex>
     </section>
   )
