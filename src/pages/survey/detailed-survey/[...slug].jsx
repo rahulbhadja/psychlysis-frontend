@@ -216,7 +216,15 @@ const DetailedSurvey = () => {
                   mt={2}
                   mb={4}
                 >
-                  {message}
+                  {/* {message} */}
+
+                  {survey?.surveyName === 'Mood survey'
+                    ? `Thank you for your time. Your response has been recorded. 
+                    If you are feeling low, please reach out to your friends or family.
+                    If you are feeling suicidal, please reach out to a mental health professional.
+                    IF yor are not yourself and you are feeling suicidal, please call 911.
+                    Please do complete the survey again after 3 weeks.`
+                    : message}
                 </Text>
                 <Button
                   variant={'primary'}
